@@ -16,6 +16,7 @@
   - [Versioning](#Versioning)
 - [Generating Releases](#generating-releases)
   - [Generating an Initial Release](#generating-an-initial-release)
+- [Contributing](#contributing)
 <!-- /TOC -->
 
 This project is preconfigured with [CircleCi](https://circleci.com/) for continuous integration and delivery, and serves as the starting point for the development and deployment of future Python modules that automate releases via `semantic-release.`
@@ -137,5 +138,5 @@ git push -u origin v1.0.3
 ```
 Moving forward, `semantic-release` should be able to automatically generate releases for you. 
 
-### Contributing
-If you find this project useful and would like to contribute back to it, feel free to check out [`CONTRIBUTING`](CONTRIBUTING.md) page. 
+## Contributing
+If you find this project useful and would like to contribute back to it, feel free to check out the [`CONTRIBUTING`](CONTRIBUTING.md) page. 
