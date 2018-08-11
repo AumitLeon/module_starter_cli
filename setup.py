@@ -14,7 +14,7 @@ with open('requirements-dev.txt') as file:
     DEVELOPMENT_MODULES = [line.strip() for line in file]
 
 
-setup(name='module-name',
+setup(name='module-starter.leon',
       version=VERSION,
       description='Starter project for python modules',
       long_description=readme(),
