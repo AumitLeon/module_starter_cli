@@ -1,1 +1,2 @@
 echo "Conducting tests..."
+pytest
