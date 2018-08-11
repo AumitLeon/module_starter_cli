@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:2.7
     steps:
       - checkout
 
@@ -12,9 +12,9 @@ jobs:
       - run:
           name: install python dependencies
           command: |
-            python3 -m venv venv
+            virtualenv venv
             . venv/bin/activate
-            make dev
+            pip install -e .[dev]
 
       - save_cache:
           key: v1-dependency-cache-{{ checksum "setup.py" }}
@@ -40,7 +40,7 @@ jobs:
       - run:
           name: install python dependencies
           command: |
-            python3 -m venv venv
+            virtualenv venv
             . venv/bin/activate
             pip install -e .[dev]
 
@@ -52,7 +52,7 @@ jobs:
       - run:
           name: verify git tag vs. version
           command: |
-            python3 -m venv venv
+            virtualenv venv
             . venv/bin/activate
             python setup.py verify
 
@@ -66,7 +66,7 @@ jobs:
       - run:
           name: create packages
           command: |
-            python3 setup.py sdist bdist_wheel
+            python setup.py sdist bdist_wheel
 
       - run:
           name: upload to pypi
