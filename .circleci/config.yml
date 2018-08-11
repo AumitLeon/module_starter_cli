@@ -1,0 +1,82 @@
+version: 2
+jobs:
+  build_and_test:
+    docker:
+      - image: circleci/python:2.7
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
+
+      - run:
+          name: install python dependencies
+          command: |
+            virtualenv venv
+            . venv/bin/activate
+            pip install -e .dev
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
+          paths:
+            - "venv"
+
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            tests/test.sh
+
+  release:
+    docker:
+      - image: circleci/python:2.7
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
+
+      - run:
+          name: install python dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -e .[dev
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
+          paths:
+            - "venv"
+
+      - run:
+          name: verify git tag vs. version
+          command: |
+            virtualenv venv
+            . venv/bin/activate
+            python setup.py verify
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = aumitleon" >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+      - run:
+          name: generate release
+          command: |
+            semantic-release publish
+            python setup.py sdist
+	          python setup.py bdist_wheel
+            twine upload dist/*
+        
+workflows:
+  version: 2
+  build_and_release:
+    jobs:
+      - build_and_test:
+          context: org-global
+      - release:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - master
+          context: org-global
