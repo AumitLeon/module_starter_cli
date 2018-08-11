@@ -4,7 +4,7 @@
 [![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 
 
-The purpose of this project is to create a shared basis for future python modules, precongifugred with continuous integration, delivery, and automated releases. 
+The purpose of this project is to create a shared basis for future python modules precongifugred with continuous integration, delivery, and automated releases. 
 
 ## Table of Contents
 <!-- TOC depthFrom:2 -->
