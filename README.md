@@ -136,3 +136,6 @@ Push the tag to the remote:
 git push -u origin v1.0.3
 ```
 Moving forward, `semantic-release` should be able to automatically generate releases for you. 
+
+### Contributing
+If you find this project useful and would like to contribute back to it, feel free to check out [`CONTRIBUTING`](CONTRIBUTING.md) page. 
