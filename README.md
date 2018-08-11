@@ -16,8 +16,6 @@
   - [Versioning](#Versioning)
 - [Generating Releases](#generating-releases)
   - [Generating an Initial Release](#generating-an-initial-release)
-
-
 <!-- /TOC -->
 
 This project is preconfigured with [CircleCi](https://circleci.com/) for continuous integration and delivery, and serves as the starting point for the development and deployment of future Python modules that automate releases via `semantic-release.`
@@ -111,7 +109,7 @@ version_variable = setup.py:VERSION
 upload_to_pypi = true
 ```
 
-When generating new releases, `semantic-release` will automatically bump this variable to the new version number. This is pushed automatically to github via the `release` workflow in our [`config.yml](.circleci/config.yml).
+When generating new releases, `semantic-release` will automatically bump this variable to the new version number. This is pushed automatically to github via the `release` workflow in our [`config.yml`](.circleci/config.yml).
 
 ## Generating Releases
 Releases and versioning are automatically handled by [`python-semantic-release`](https://python-semantic-release.readthedocs.io/en/latest/). In the `release` workflow within our [`config.yml`](.circleci/config.yml), we have a step that generates the distribution and publishes to the [Python Package Index](https://pypi.org/) (PyPI):
