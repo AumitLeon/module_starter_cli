@@ -64,6 +64,8 @@ jobs:
       - run:
           name: upload to pypi
           command: |
+            git config --global user.email "aumitleon1@gmail.com"
+            git config --global user.name "aumitleon"
             . venv/bin/activate
             semantic-release publish
             twine upload dist/*
