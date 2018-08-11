@@ -68,7 +68,6 @@ jobs:
             git config --global user.name "aumitleon"
             . venv/bin/activate
             semantic-release publish
-            twine upload dist/*
 
 workflows:
   version: 2
