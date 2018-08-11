@@ -1,68 +1,91 @@
 version: 2
-references:
-  python_2_7_image: &python_2_7_image
-    working_directory: ~/circleci
-    docker:
-      - image: circleci/python:2.7
-  workspace_cache_key: &workspace_cache_key
-    repo-{{ .Environment.CIRCLE_SHA1 }}
-  restore_workspace: &restore_workspace
-    restore_cache:
-      name: Restore workspace cache
-      key: *workspace_cache_key
-  pip_cache_key: &pip_cache_key
-    pip-v1-{{ checksum "setup.py" }}
-  restore_pip_local_env: &restore_pip_local_env
-    restore_cache:
-      keys:
-        - *pip_cache_key
-        - pip-v1-
 jobs:
-  build_and_test:
+  build:
     docker:
-      - image: circleci/python:2.7
+      - image: circleci/python:3.6
     steps:
       - checkout
+
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
+
       - run:
-          name: Download Dependencies
+          name: install python dependencies
           command: |
-            virtualenv local-env
-            . local-env/bin/activate
-            pip install -e .[dev]
-      - run:
-          name: Running tests
-          command: |
-            . local-env/bin/activate
-            tests/test.sh
-      - store_test_results:
-            path: tmp
+            python3 -m venv venv
+            . venv/bin/activate
+            make dev
+
       - save_cache:
-          key: *pip_cache_key
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
           paths:
-            - "local-env"
-      - save_cache:
-          key: *workspace_cache_key
-          paths: ~/circleci
-  release:
-    <<: *python_2_7_image
-    steps:
-      - *restore_workspace
-      - *restore_pip_local_env
+            - "venv"
+
       - run:
-          name: Release
+          name: run tests
           command: |
-            . local-env/bin/activate
-            semantic-release publish
-            python setup.py sdist bdist_wheel
+            . venv/bin/activate
+            tests/test
+
+
+  deploy:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
+
+      - run:
+          name: install python dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make dev
+
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "setup.py" }}
+          paths:
+            - "venv"
+
+      - run:
+          name: verify git tag vs. version
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            python setup.py verify
+
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = aumitleon" >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+
+      - run:
+          name: create packages
+          command: |
+            make package
+
+      - run:
+          name: upload to pypi
+          command: |
+            . venv/bin/activate
+            twine upload dist/*
+
 workflows:
   version: 2
-  build_and_release:
+  build_and_deploy:
     jobs:
-      - build_and_test:
-      - release:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
           requires:
-            - build_and_test
+            - build
           filters:
             branches:
-              only:
+              only: 
                 - master
