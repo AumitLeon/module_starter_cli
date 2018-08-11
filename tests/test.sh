@@ -1,2 +1,2 @@
 echo "Conducting tests..."
-pytest
+echo "Should run pytest"
