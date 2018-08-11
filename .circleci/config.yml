@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_and_test:
+  build:
     docker:
       - image: circleci/python:2.7
     steps:
@@ -70,7 +70,7 @@ workflows:
   version: 2
   build_and_release:
     jobs:
-      - build_and_test:
+      - build:
           context: org-global
       - release:
           requires:
