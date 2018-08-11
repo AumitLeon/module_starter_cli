@@ -50,13 +50,6 @@ jobs:
             - "venv"
 
       - run:
-          name: verify git tag vs. version
-          command: |
-            virtualenv venv
-            . venv/bin/activate
-            python setup.py verify
-
-      - run:
           name: init .pypirc
           command: |
             echo -e "[pypi]" >> ~/.pypirc
