@@ -3,6 +3,9 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 
+
+The purpose of this project is to create a shared basis for future python modules, precongifugred with continuous integration, delivery, and automated releases. 
+
 ## Table of Contents
 <!-- TOC depthFrom:2 -->
 - [Usage](#usage)
