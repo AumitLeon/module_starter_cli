@@ -20,7 +20,7 @@ references:
 jobs:
   build_and_test:
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:2.7
     steps:
       - checkout
       - run:
@@ -59,7 +59,6 @@ workflows:
   build_and_release:
     jobs:
       - build_and_test:
-          context: org-global
       - release:
           requires:
             - build_and_test
@@ -67,4 +66,3 @@ workflows:
             branches:
               only:
                 - master
-          context: org-global
