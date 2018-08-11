@@ -65,6 +65,7 @@ jobs:
           name: upload to pypi
           command: |
             . venv/bin/activate
+            semantic-release publish
             twine upload dist/*
 
 workflows:
