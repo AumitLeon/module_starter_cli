@@ -45,7 +45,7 @@ Downstream modules can be installed in the same way once deployed via `semantic-
 ## Development
 In order to utilize the structure of this project for downstream modules, you should consider the following notes.
 
-### Configuraiton
+### Configuration
 All module metadata lives within [`setup.py`](setup.py). This is where you link depenencies, specify source directories, and other important package metadata. A snippet of our [`setup.py`](setup.py):
 ```python
 setup(name='module-starter.leon',
