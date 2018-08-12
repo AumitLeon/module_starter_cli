@@ -1,10 +1,4 @@
 # Starter repo for python modules
-[![CircleCI](https://circleci.com/gh/AumitLeon/module_starter_cli.svg?style=svg)](https://circleci.com/gh/AumitLeon/module_starter_cli) [![PyPI version](https://badge.fury.io/py/module-starter.leon.svg)](https://badge.fury.io/py/module-starter.leon)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
-[![Documentation Status](https://readthedocs.org/projects/module-starter-cli/badge/?version=latest)](https://module-starter-cli.readthedocs.io/en/latest/?badge=latest)
-
-
 
 The purpose of this project is to create a shared basis for future python modules precongifugred with continuous integration, delivery, and automated releases. 
 
