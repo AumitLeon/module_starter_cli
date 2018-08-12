@@ -39,13 +39,13 @@ To install this module:
 ```
 pip install module-starter.leon
 ```
-Downstream modules can be installed in the same way once deployed via `semantic-release`, just replace `module-starter.leon` with the name of the module specified in `setup.py`.
+Downstream modules can be installed in the same way once deployed via `semantic-release`, just replace `module-starter.leon` with the name of the module specified in [`setup.py`](setup.py).
 
 ## Development
 In order to utilize the structure of this project for downstream modules, you should consider the following notes.
 
 ### Configuraiton
-All module metadata lives within `setup.py`. This is where you link depenencies, specify source directories, and other important package metadata. A snippet of our `setup.py`:
+All module metadata lives within [`setup.py`](setup.py). This is where you link depenencies, specify source directories, and other important package metadata. A snippet of our [`setup.py`](setup.py):
 ```python
 setup(name='module-starter.leon',
       version=VERSION,
@@ -82,7 +82,7 @@ tests/
     test.sh
 
 ```
-`setup.py` should live in the root of your project. Other files that should live in the root of your project:
+[`setup.py`](setup.py) should live in the root of your project. Other files that should live in the root of your project:
 
 * [`MANIFEST.in`](MANIFEST.in): Specifies a list of files outside of your specified `packages` (in this case, `src`) that should be included in your distribution.
 * [`setup.cfg`](setup.cfg): Includes configuration information for `semantic-release`. 
