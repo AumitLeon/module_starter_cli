@@ -5,3 +5,5 @@ extra_javascript: [readthedocs-data.js, 'https://media.readthedocs.org/static/co
 google_analytics: null
 site_name: module_starter_cli
 theme_dir: /home/docs/checkouts/readthedocs.org/readthedocs/templates/mkdocs/readthedocs
+nav:
+- Home: 'index.md'
